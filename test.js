@@ -1,6 +1,6 @@
-import { generateUniqueID, addAccount } from './index.js';
+import { generateUniqueID, addAccount } from './index.js'; // imports self made functions from index.js
 
-console.log(addAccount(["Timothy", "Reyes", "tareyes1@gmail.com", 18]));
+console.log(addAccount(["Timothy", "Reyes", "tareyes1@gmail.com", 18])); // sample function calls to ensure to test exercise requirements
 console.log(addAccount(["Josef", "Reyes", "jreyes1@gmail.com", 21]));
 console.log(addAccount(["Paul", "Reyes", "preyes1@gmail.com", 17]));
 console.log(addAccount(["Jose", "Conde", "jconde@gmail.com", 18]));
