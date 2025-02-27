@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import validator from 'validator';
-var fs = require('fs');
+import fs from 'fs';
 
 function generateUniqueID(first_name, last_name){
     if(typeof first_name != 'string' || typeof last_name != 'string'){
@@ -28,13 +28,14 @@ function addAccount(user_info){
         return false;
     }
 
-    if((typeof user_info[0] != "string" && user_info[0].length == 0) ||
-    (typeof user_info[1] != "string" && user_info[1].length == 0) ||
-    (typeof user_info[2] != "string" && user_info[2].length == 0)){
+    if((typeof user_info[0] != "string" || user_info[0].length == 0) ||
+    (typeof user_info[1] != "string" || user_info[1].length == 0) ||
+    (typeof user_info[2] != "string" || user_info[2].length == 0) ||
+    typeof user_info[3] != "number"){
         return false;
     }
 
-    if(Number(user_info[3]) < 18){
+    if(user_info[3] < 18){
         return false;
     }
 
@@ -44,10 +45,13 @@ function addAccount(user_info){
 
     let uniqueID = generateUniqueID(user_info[0], user_info[1]);
 
-    console.log(user_info[0]+","+user_info[1]+","+user_info[2]+","+user_info[3]+","+uniqueID);
+    let user_text = user_info[0]+","+user_info[1]+","+user_info[2]+","+user_info[3]+","+uniqueID+"\n";
+
+    fs.appendFile('users.txt', user_text, function (err) {
+        if (err) throw err;
+    });
 
     return true;
 }
 
-console.log(generateUniqueID("Timothy", "Reyes"));
-console.log(addAccount(["Timothy", "Reyes", "tareyes1@gmail.com", 18]));
+export { generateUniqueID, addAccount }
